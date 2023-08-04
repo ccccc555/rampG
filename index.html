@@ -64,8 +64,8 @@
       // Draw ramp sections
       ctx.beginPath();
       ctx.moveTo(startX, baseY);
-      ctx.lineTo(startX + 100, baseY - y2 *scaleY);
-      ctx.lineTo(startX + 200, baseY - y3 *scaleY);
+      ctx.lineTo(startX + 100, baseY - (y2-startHeight) *scaleY);
+      ctx.lineTo(startX + 200, baseY - (y3-startHeight) *scaleY);
       ctx.lineTo(startX + 300, baseY - 200);
       ctx.stroke();
 
