@@ -6,23 +6,26 @@
 <body>
   <h2>Ramp Design</h2>
   <label for="length">Length:</label>
-  <input type="number" id="length" step="any" placeholder="18" value="18">
+  <input type="number" id="length" step="any" value="18">
   <br>
   <label for="startHeight">Start Height:</label>
-  <input type="number" id="startHeight" step="any" placeholder="10" value="10">
+  <input type="number" id="startHeight" step="any" value="500">
   <br>
   <label for="endHeight">End Height:</label>
-  <input type="number" id="endHeight" step="any" placeholder="15" value="15">
+  <input type="number" id="endHeight" step="any" value="500.45">
   <br>
   <label for="incline1">Incline for First and Last Sections (%):</label>
-  <input type="number" id="incline1" step="any" placeholder="1.5" value="1.5">
+  <input type="number" id="incline1" step="any" value="1.5">
   <br>
   <button onclick="calculate()">Calculate</button>
   <p>Result:</p>
   <p id="result"></p>
-  <canvas id="rampCanvas" width="400" height="200"></canvas>
+  <canvas id="rampCanvas" width="500" height="300"></canvas>
 
   <script>
+    const canvas = document.getElementById("rampCanvas");
+    const ctx = canvas.getContext("2d")
+    
     function calculate() {
       const length = parseFloat(document.getElementById("length").value);
       const startHeight = parseFloat(document.getElementById("startHeight").value);
@@ -49,25 +52,26 @@
     }
 
     function drawRamp(length, startHeight, endHeight, x2, y2, x3, y3) {
-      const canvas = document.getElementById("rampCanvas");
-      const ctx = canvas.getContext("2d");
+      
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      scaleY= (endHeight - startHeight)/ 200
 
       const baseY = canvas.height - 20;
       const startX = 20;
-      const endX = startX + length;
+      const endX = 420
 
       // Draw ramp sections
       ctx.beginPath();
-      ctx.moveTo(startX, baseY - startHeight * 10);
-      ctx.lineTo(startX + x2, baseY - y2 * 10);
-      ctx.lineTo(startX + x3, baseY - y3 * 10);
-      ctx.lineTo(endX, baseY - endHeight * 10);
+      ctx.moveTo(startX, baseY);
+      ctx.lineTo(startX + 100, baseY - y2 *scaleY);
+      ctx.lineTo(startX + x3, baseY - y3 *scaleY);
+      ctx.lineTo(endX, baseY - endHeight *scaleY);
       ctx.stroke();
 
       // Draw coordinate values
-      ctx.fillText(`X2,Y2 (${x2.toFixed(2)}, ${y2.toFixed(2)})`, startX + x2 - 50, baseY - y2 * 10 - 10);
-      ctx.fillText(`X3,Y3 (${x3.toFixed(2)}, ${y3.toFixed(2)})`, startX + x3 - 50, baseY - y3 * 10 - 10);
+      ctx.fillText(`X2,Y2 (${x2.toFixed(2)}, ${y2.toFixed(2)})`, startX + 90, baseY - y2 * scaleY - 10);
+      ctx.fillText(`X3,Y3 (${x3.toFixed(2)}, ${y3.toFixed(2)})`, startX + 190, baseY - y3 * scaleY - 10);
     }
   </script>
 </body>
