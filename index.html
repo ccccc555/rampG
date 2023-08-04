@@ -59,13 +59,13 @@
 
       const baseY = canvas.height - 20;
       const startX = 20;
-      const endX = 420
+      const endX = 320
 
       // Draw ramp sections
       ctx.beginPath();
       ctx.moveTo(startX, baseY);
-      ctx.lineTo(startX + 100, baseY - y2 *scaleY);
-      ctx.lineTo(startX + x3, baseY - y3 *scaleY);
+      ctx.lineTo(startX + 90, baseY - y2 *scaleY);
+      ctx.lineTo(startX + 190, baseY - y3 *scaleY);
       ctx.lineTo(endX, baseY - endHeight *scaleY);
       ctx.stroke();
 
