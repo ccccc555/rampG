@@ -68,12 +68,12 @@
       const gy3=(y3-startHeight)*scaleY
       ctx.lineTo(startX + 100, baseY - gy2 );
       ctx.lineTo(startX + 200, baseY - gy3 );
-      ctx.lineTo(startX + 300, baseY - 200);
+      ctx.lineTo(startX + 300, baseY - 100);
       ctx.stroke();
 
       // Draw coordinate values
-      ctx.fillText(`(${x2.toFixed(2)}, ${y2.toFixed(2)})`, startX + 90, baseY - gy2 - 10);
-      ctx.fillText(`(${x3.toFixed(2)}, ${y3.toFixed(2)})`, startX + 190, baseY - gy3 - 10);
+      ctx.fillText(`(${x2.toFixed(2)}, ${y2.toFixed(2)})`, startX + 90, baseY - gy2 - 15);
+      ctx.fillText(`(${x3.toFixed(2)}, ${y3.toFixed(2)})`, startX + 190, baseY - gy3 - 15);
     }
   </script>
 </body>
