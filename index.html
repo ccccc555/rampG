@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ramp Design</title>
+</head>
+<body>
+  <h2>Ramp Design</h2>
+  <label for="length">Length:</label>
+  <input type="number" id="length" step="any" placeholder="18" value="18">
+  <br>
+  <label for="startHeight">Start Height:</label>
+  <input type="number" id="startHeight" step="any" placeholder="10" value="10">
+  <br>
+  <label for="endHeight">End Height:</label>
+  <input type="number" id="endHeight" step="any" placeholder="15" value="15">
+  <br>
+  <label for="incline1">Incline for First and Last Sections (%):</label>
+  <input type="number" id="incline1" step="any" placeholder="1.5" value="1.5">
+  <br>
+  <button onclick="calculate()">Calculate</button>
+  <p>Result:</p>
+  <p id="result"></p>
+  <canvas id="rampCanvas" width="400" height="200"></canvas>
+
+  <script>
+    function calculate() {
+      const length = parseFloat(document.getElementById("length").value);
+      const startHeight = parseFloat(document.getElementById("startHeight").value);
+      const endHeight = parseFloat(document.getElementById("endHeight").value);
+      const incline1 = parseFloat(document.getElementById("incline1").value) / 100;
+      
+      const sectionLength = length / 3;
+      const midX = sectionLength;
+      
+      const x2 = sectionLength;
+      const y2 = startHeight + (incline1 * x2);
+      
+      const x3 = sectionLength * 2;
+      const y3 = endHeight - (incline1 * (length - x3));
+      
+      const midSlope = (y3 - y2) / midX;
+      const midSlopePercent = (midSlope * 100).toFixed(2);
+
+      const result = `X2,Y2 = (${x2.toFixed(2)}, ${y2.toFixed(2)})<br>X3,Y3 = (${x3.toFixed(2)}, ${y3.toFixed(2)})<br>Mid slope gradient: ${midSlopePercent}%<br>First and Last Section Incline: ${incline1 * 100}%`;
+      
+      document.getElementById("result").innerHTML = result;
+
+      drawRamp(length, startHeight, endHeight, x2, y2, x3, y3);
+    }
+
+    function drawRamp(length, startHeight, endHeight, x2, y2, x3, y3) {
+      const canvas = document.getElementById("rampCanvas");
+      const ctx = canvas.getContext("2d");
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      const baseY = canvas.height - 20;
+      const startX = 20;
+      const endX = startX + length;
+
+      // Draw ramp sections
+      ctx.beginPath();
+      ctx.moveTo(startX, baseY - startHeight * 10);
+      ctx.lineTo(startX + x2, baseY - y2 * 10);
+      ctx.lineTo(startX + x3, baseY - y3 * 10);
+      ctx.lineTo(endX, baseY - endHeight * 10);
+      ctx.stroke();
+
+      // Draw coordinate values
+      ctx.fillText(`X2,Y2 (${x2.toFixed(2)}, ${y2.toFixed(2)})`, startX + x2 - 50, baseY - y2 * 10 - 10);
+      ctx.fillText(`X3,Y3 (${x3.toFixed(2)}, ${y3.toFixed(2)})`, startX + x3 - 50, baseY - y3 * 10 - 10);
+    }
+  </script>
+</body>
+</html>
