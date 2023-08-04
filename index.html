@@ -20,7 +20,7 @@
   <button onclick="calculate()">Calculate</button>
   <p>Result:</p>
   <p id="result"></p>
-  <canvas id="rampCanvas" width="500" height="300"></canvas>
+  <canvas id="rampCanvas" width="500" height="150"></canvas>
 
   <script>
     const canvas = document.getElementById("rampCanvas");
@@ -55,7 +55,7 @@
       
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
-      scaleY= 200/(endHeight - startHeight)
+      scaleY= 100/(endHeight - startHeight)
 
       const baseY = canvas.height - 20;
       const startX = 20;
@@ -72,8 +72,8 @@
       ctx.stroke();
 
       // Draw coordinate values
-      ctx.fillText(`X2,Y2 (${x2.toFixed(2)}, ${y2.toFixed(2)})`, startX + 90, baseY - gy2 - 10);
-      ctx.fillText(`X3,Y3 (${x3.toFixed(2)}, ${y3.toFixed(2)})`, startX + 190, baseY - gy3 - 10);
+      ctx.fillText(`(${x2.toFixed(2)}, ${y2.toFixed(2)})`, startX + 90, baseY - gy2 - 10);
+      ctx.fillText(`(${x3.toFixed(2)}, ${y3.toFixed(2)})`, startX + 190, baseY - gy3 - 10);
     }
   </script>
 </body>
